@@ -12,10 +12,10 @@ All data is published exactly as received, with no manual modification, to ensur
 ```
 .
 ├── snapshot/
-│   └── kaito_leaderboard_2025-10-14.json
+│   └── kaito_leaderboard_2025-10-13.json
 ├── signature/
-│   └── kaito_leaderboard_2025-10-14_hash.txt
-└── README.md
+│   └── kaito_leaderboard_2025-10-13_hash.txt
+└── Readme.md
 ```
 
 * `snapshot/` contains the raw JSON data from Kaito’s API.
@@ -27,43 +27,31 @@ All data is published exactly as received, with no manual modification, to ensur
 
 ## File Descriptions
 
-### `snapshot/kaito_leaderboard_2025-10-14.json`
+### `snapshot/kaito_leaderboard_2025-10-13.json`
 
-Official leaderboard data as returned by the Kaito API for the week of **October 7–14, 2025**.
-Includes Community and Creator leaderboards and all relevant engagement metrics.
+Official leaderboard data as returned by the Kaito API.
+Contains the ranked list of Yappers with mindshare, contribution values, and all engagement metrics.
 
-**Example structure (illustrative):**
+**Structure (summarized; see the snapshot for the full schema):**
 
 ```json
-{
-  "timestamp": "2025-10-14T18:00:00Z",
-  "source": "kaito_api_v1",
-  "leaderboards": {
-    "community": [
-      {
-        "rank": 1,
-        "username": "@alpha",
-        "impressions": 12450,
-        "likes": 890,
-        "engagement_rate": 7.15,
-        "crystals_awarded": 350
-      }
-    ],
-    "creator": [
-      {
-        "rank": 1,
-        "username": "@beta",
-        "impressions": 15600,
-        "likes": 1040,
-        "engagement_rate": 6.67,
-        "crystals_awarded": 370
-      }
-    ]
+[
+  {
+    "rank": "1",
+    "mindshare": 0.010413377768675222,
+    "contribution": 0.010413377768675222,
+    "username": "@example",
+    "total_impressions": 12450,
+    "total_likes": 890,
+    "total_smart_engagements": 210,
+    "tweet_counts": 42,
+    "peripheral_tweet_urls": [],
+    "tweet_urls": []
   }
-}
+]
 ```
 
-### `signature/kaito_leaderboard_2025-10-14_hash.txt`
+### `signature/kaito_leaderboard_2025-10-13_hash.txt`
 
 SHA256 checksum of the JSON file for verification.
 
@@ -75,16 +63,22 @@ SHA256 checksum of the JSON file for verification.
 * No post-processing, filtering, or manual edits were made.
 * File integrity can be verified using the SHA256 checksum below.
 
+**Important — line endings:** the hash in `signature/` is computed over the committed file content with **LF** line endings, exactly as stored in this repository. If your local checkout converts line endings (e.g. Git `autocrlf` on Windows), normalize to LF first — the shipped `.gitattributes` file pins `snapshot/*.json` and `signature/*.txt` to LF, so a clean fresh clone always matches.
+
 **SHA256 Checksum**
 
 ```
-sha256(kaito_leaderboard_2025-10-14.json)= <insert-checksum-here>
+sha256(kaito_leaderboard_2025-10-13.json)= f9c423185ad8c3d9202d495b2a9c9a77cd90481c8680d7430cd6deaa0b96be2d
 ```
 
 **Verify locally**
 
 ```bash
-shasum -a 256 snapshot/kaito_leaderboard_2025-10-14.json
+# Use the committed (LF) content of the file
+git show HEAD:snapshot/kaito_leaderboard_2025-10-13.json | shasum -a 256
+
+# Or, on a fresh clone with .gitattributes honored:
+shasum -a 256 snapshot/kaito_leaderboard_2025-10-13.json
 ```
 
 ---
@@ -93,7 +87,7 @@ shasum -a 256 snapshot/kaito_leaderboard_2025-10-14.json
 
 * **Update Frequency:** Weekly (every Tuesday)
 * **Next Update:** 2025-10-21
-* **Last Updated:** 2025-10-14
+* **Last Updated:** 2025-10-13
 
 All previous snapshots will remain permanently accessible for audit and comparison.
 

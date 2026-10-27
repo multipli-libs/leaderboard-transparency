@@ -1,0 +1,5 @@
+# Pin deterministic line endings so SHA256 signatures in signature/ always
+# match the committed file content, regardless of the committer's OS.
+snapshot/*.json text eol=lf
+signature/*.txt text eol=lf
+*.md text eol=lf
